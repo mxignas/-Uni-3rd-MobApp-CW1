@@ -8,9 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// routes
 const lessons = require('./routes/api/lessons');
+const orders = require('./routes/api/orders');
 
-app.use('/api/lessons', lessons); // for the route
+// for the route
+app.use('/api/lessons', lessons); 
+app.use('/api/orders', orders); 
 
 const port = process.env.PORT || 5000; // PORT for Heroku
 

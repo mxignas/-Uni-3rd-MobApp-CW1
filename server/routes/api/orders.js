@@ -3,28 +3,28 @@ const mongodb = require("mongodb");
 
 const router = express.Router();
 
-// Get Lessons
+// Get Orders
 router.get('/', async (req, res) => {
-    const lessons = await loadLessonsCollection();
-    res.send(await lessons.find({}).toArray());
+    const Orders = await loadOrdersCollection();
+    res.send(await Orders.find({}).toArray());
 });
 
-// Add Lessons
+// Add Orders
 router.post('/', async (req, res) => {
-    const lessons = await loadLessonsCollection();
-    await lessons.insertOne({})
+    const Orders = await loadOrdersCollection();
+    await Orders.insertOne({})
 });
 
-// Delete Lessons
+// Delete Orders
 
 
 // Loading collection and connecting to a MongoDB
-async function loadLessonsCollection() {
+async function loadOrdersCollection() {
     const client = await mongodb.MongoClient.connect('mongodb+srv://dbAdmin:admin123@mobileappcw2.ovizx.mongodb.net/<Coursework2>?retryWrites=true&w=majority', {
         useUnifiedTopology: true
     });
 
-    return client.db('Coursework2').collection('Lessons');
+    return client.db('Coursework2').collection('OrderInfo');
 };
 
 
