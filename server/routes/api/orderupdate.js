@@ -2,12 +2,13 @@ const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
 
-// Get Lessons
-router.get('/', async (req, res) => {
-    const lessons = await loadLessonsCollection(); // loads collection
-    res.send(await lessons.find({}).toArray()); // finds and converts to array
-    console.log("GET request for lessons is succesfull ");
-});
+// Put/Update lesson spaces
+// router.put('/:id', async (req, res, next) => {
+//     const Lessons = await loadLessonsCollection();
+//     await Lessons.updateOne({ __id: mongodb.ObjectID(req.params.id) },
+//         { $set: { NumberOfSpace: 2 } });
+//     res.status(200).send();
+// });
 
 // Loading collection and connecting to a MongoDB
 async function loadLessonsCollection() {
