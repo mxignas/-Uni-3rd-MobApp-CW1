@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 
 // initializing app
 const app = express();
@@ -7,6 +8,10 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors());
+
+let publicPath = path.resolve(__dirname, 'assets');
+app.use(express.static(publicPath));
+
 
 // routes
 const lessons = require('./routes/api/lessons');
