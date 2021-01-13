@@ -65,9 +65,6 @@
                     response.json().then(
                         function(json){
                             app.lessons = json
-                            if (response.status(404).json) {
-                                console.log("Test");
-                            }
                         }
                     ).catch(function (err) {
                         console.warn("something went wrong", err);

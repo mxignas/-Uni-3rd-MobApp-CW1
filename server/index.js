@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 let publicPath = path.resolve(__dirname, 'assets');
-app.use(express.static(publicPath));
+app.use('/static', express.static(path.join(publicPath)));
 
 
 // routes
@@ -34,4 +34,4 @@ if(process.env.NODE_ENV == 'production') {
 
 const port = process.env.PORT || 5000; // PORT for Heroku
 
-app.listen(port, () => console.log('Server started on port ${port}'));
+app.listen(port, () => console.log('Server started on port ' + port));

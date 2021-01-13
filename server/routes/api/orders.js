@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const Orders = await loadOrdersCollection(); // loads collection
     res.send(await Orders.find({}).toArray()); // finds and converts to array
-    console.log("GET request for order is succesfull");
+    console.log("GET request for orders is succesfull");
 });
 
 // Post/Add Orders
