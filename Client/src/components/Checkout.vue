@@ -76,7 +76,9 @@
                         <p><strong>Last Name: </strong>{{ lastName }}</p>
                         <p><strong>Phone Number: </strong>{{ phone }}</p>
                         <p><strong>Email: </strong>{{ email }}</p>
-                        <input type="submit" class="btn btn-primary"></input>
+                        <div v-for="lesson in cart">
+                        <input type="submit" class="btn btn-primary" @click='addOrder(lesson), updateSpace()'></input>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -139,6 +141,40 @@ export default {
             this.$router.push({ name: 'Index' })
             }
         },
+        addOrder(lesson){
+            
+            const lssn = this.$store.state.Lessons.find(lssn => {
+                return lssn.lessonID == lesson.id
+            });
+            const newOrder = {name: this.firstName, PhoneNumber: this.phone, LessonID: lesson.id, NumberOfSpace: '1'};
+
+            //set the url to your server and route
+            fetch('https://calm-inlet-30176.herokuapp.com/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newOrder),
+                })
+                .then(response => response.json())
+                .then(responseJSON => {
+                    console.log('Success: ', responseJSON);
+                });
+            },
+        updateSpace(){
+            const currentlessons = this.$store.state.Lessons;
+            fetch('https://calm-inlet-30176.herokuapp.com/api/lessons', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(currentlessons),
+            })
+            .then(response => response.json())
+            .then(responseJSON => {
+                console.log('Success: ', responseJSON);
+            });
+        }
     },
     // computed properties to get objects from $store
     computed: {
